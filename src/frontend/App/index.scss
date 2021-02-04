@@ -1,0 +1,149 @@
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+
+    &::-moz-placeholder {
+        @content;
+    }
+
+    &:-ms-input-placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder {
+        @content;
+    }
+}
+
+body {
+    font-family: monospace;
+}
+
+:local {
+    .app {
+        background-image: url(/images/gratisography-open-road.jpg);
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-size: cover;
+        background-position: 50% 50%;
+        transform: scale(1.2);
+        transition: 0.3s all;
+        opacity: 0;
+
+        .title {
+            position: absolute;
+            right: 2vmin;
+            top: 1vmin;
+            font-size: 2vmin;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+            color: white;
+        }
+
+        &.loaded {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .thinkBox {
+            position: fixed;
+            top: calc(50% - 4vmin);
+            left: calc(50% - 50vmin);
+            width: 92vmin;
+            border: none;
+            background-color: rgba(56, 190, 252, 0.43);
+            color: white;
+            height: 0;
+            padding: 4vmin;
+            font-size: 3vmin;
+            transition: 0.3s top;
+            font-family: monospace;
+
+            @include placeholder {
+                color: white;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .results {
+            position: fixed;
+            top: calc(50% + 4vmin);
+            left: calc(50% - 50vmin);
+            width: 100vmin;
+            opacity: 0;
+            transition: 0.3s top, 0.3s opacity;
+
+            .thought {
+                display: flex;
+                font-size: 2vmin;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                background-color: rgba(213, 214, 214, 0.83);
+                width: 100vmin;
+                margin: 0;
+                overflow: hidden;
+                cursor: pointer;
+
+                &:nth-child(even) {
+                    background-color: rgba(213, 214, 214, 0.73);
+                }
+
+                >:last-child,
+                >:first-child {
+                    flex-basis: 4vmin;
+                    display: flex;
+                    
+                    >svg {
+                        margin: auto;
+                    }
+                }
+                >:not(:first-child):not(:last-child) {
+                    flex-grow: 1;
+                    flex-shrink: 1;
+                    margin: auto 1vmin;
+                }
+            }
+
+            .thoughtEnter {
+                height: 0;
+            }
+
+            .thoughtEnterActive {
+                height: 4vmin;
+                transition: 300ms height;
+            }
+
+            .thoughtEnterDone {
+                height: 4vmin;
+            }
+
+            .thoughtExit {
+                height: 4vmin;
+            }
+
+            .thoughtExitActive {
+                height: 0;
+                transition: 300ms height;
+            }
+        }
+
+        &.hasResults {
+            .results {
+                opacity: 1;
+                top: calc(20% + 4vmin);
+            }
+
+            .thinkBox {
+                top: calc(20% - 4vmin);
+            }
+        }
+    }
+}

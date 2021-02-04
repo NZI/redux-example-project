@@ -1,0 +1,42 @@
+:local {
+    .overlay {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        transition: 0.3s opacity;
+        pointer-events: none;
+        background-color: rgba(0, 0, 0, 0.50);
+
+        .exit {
+            position: absolute;
+            right: 2vmin;
+            top: 2vmin;
+            width: 5vmin;
+            height: 5vmin;
+            cursor: pointer;
+
+            >svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .form {
+            background-color: white;
+            position: absolute;
+            left: calc(50% - 25vmin);
+            top: calc(50% - 25vmin);
+            width: 50vmin;
+            height: 50vmin;
+
+        }
+
+        &.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+}
